@@ -1,1418 +1,1333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JPG to PDF Converter – Free Online Tool</title>
-  <meta name="description" content="Convert multiple JPG images to a single PDF file online. Free, secure, and modern converter with drag & drop, reorder, and customization." />
-  <meta name="keywords" content="jpg to pdf, image to pdf, convert jpg to pdf, free pdf converter, online pdf tool" />
-  <link rel="canonical" href="https://yourdomain.com/jpg-to-pdf" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert multiple JPG images to a single PDF file instantly with our free online tool. Fast, secure, and beautiful." />
+    <meta name="keywords" content="jpg to pdf, image to pdf, convert jpg to pdf, free pdf converter, multiple images to pdf" />
+    <meta name="robots" content="index, follow" />
+    <title>JPG to PDF Converter – Merge Images into One PDF</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
+    </script>
 
-  <!-- Open Graph / Social -->
-  <meta property="og:title" content="JPG to PDF Converter – Free Online Tool" />
-  <meta property="og:description" content="Convert multiple JPG images to a single PDF file online. Fast, secure, and modern." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/jpg-to-pdf" />
+    <style>
+        /* ── Reset & Base ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "JPG to PDF Converter",
-      "description": "Convert multiple JPG images to a single PDF file online. Free, secure, and modern.",
-      "applicationCategory": "Utility",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-  </script>
+        :root {
+            --bg-primary: #0b0e1a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.10);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f4ff;
+            --text-secondary: #a0b4d9;
+            --text-muted: #6a7fa0;
+            --gradient-1: #6c3cff;
+            --gradient-2: #a855f7;
+            --gradient-3: #3b82f6;
+            --shadow-glow: 0 8px 40px rgba(108, 60, 255, 0.25);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js">
-  </script>
+        html {
+            scroll-behavior: smooth;
+        }
 
-  <style>
-    /* ===== CSS Variables – Premium Theme ===== */
-    :root {
-      --bg: #f2f7fc;
-      --bg-card: rgba(255, 255, 255, 0.75);
-      --text-primary: #0a2a3a;
-      --text-secondary: #1a4a5e;
-      --text-muted: #5a7a8e;
-      --border-light: rgba(255, 255, 255, 0.5);
-      --shadow-card: 0 40px 70px -20px rgba(0, 40, 70, 0.18), 0 10px 30px -10px rgba(0, 0, 0, 0.04);
-      --shadow-hover: 0 50px 80px -16px rgba(0, 50, 80, 0.22);
-      --drop-bg: rgba(255, 255, 255, 0.3);
-      --drop-border: #b8d4e8;
-      --drop-border-hover: #1f7a9e;
-      --tag-bg: white;
-      --tag-border: #d2e7f2;
-      --progress-bg: rgba(0, 0, 0, 0.05);
-      --progress-fill: linear-gradient(135deg, #3fa3cf, #1a6f92);
-      --btn-primary: linear-gradient(135deg, #206684, #14506a);
-      --btn-primary-hover: #0f4a62;
-      --btn-download: linear-gradient(135deg, #2a8a5a, #1a6a4a);
-      --btn-download-hover: #0f5a3a;
-      --counter-bg: rgba(20, 60, 90, 0.06);
-      --footer-color: #3a6a7e;
-      --glow-1: #7fc1e0;
-      --glow-2: #a3d0e8;
-      --input-bg: white;
-      --input-border: #c5dae7;
-      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      --radius-card: 60px;
-      --radius-sm: 44px;
-      --radius-xs: 28px;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px 60px;
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(108, 60, 255, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+        }
 
-    [data-theme="dark"] {
-      --bg: #0f1f2b;
-      --bg-card: rgba(16, 35, 50, 0.88);
-      --text-primary: #e6f0f5;
-      --text-secondary: #b8d4e5;
-      --text-muted: #7a9ab0;
-      --border-light: rgba(255, 255, 255, 0.06);
-      --shadow-card: 0 40px 70px -20px rgba(0, 0, 0, 0.5);
-      --shadow-hover: 0 50px 80px -16px rgba(0, 0, 0, 0.6);
-      --drop-bg: rgba(20, 50, 70, 0.3);
-      --drop-border: #3a6a8a;
-      --drop-border-hover: #4a9ac0;
-      --tag-bg: #1a3a4a;
-      --tag-border: #2a5a72;
-      --progress-bg: rgba(255, 255, 255, 0.06);
-      --progress-fill: linear-gradient(135deg, #5bb8e0, #2a8ab5);
-      --btn-primary: linear-gradient(135deg, #2a7a9a, #1a5a7a);
-      --btn-primary-hover: #1a6a8a;
-      --btn-download: linear-gradient(135deg, #2a8a5a, #1a6a4a);
-      --btn-download-hover: #0f5a3a;
-      --counter-bg: rgba(255, 255, 255, 0.04);
-      --footer-color: #6a8a9e;
-      --glow-1: #1a4a6a;
-      --glow-2: #2a5a7a;
-      --input-bg: #1a3345;
-      --input-border: #3a6a8a;
-    }
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 10px;
+        }
 
-    /* ===== Reset & Base ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-    }
+        /* ── Container ── */
+        .app-wrapper {
+            width: 100%;
+            max-width: 1100px;
+        }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      background: var(--bg);
-      transition: background var(--transition);
-    }
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
 
-    /* ===== Main Card ===== */
-    .card {
-      max-width: 1000px;
-      width: 100%;
-      background: var(--bg-card);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-      border-radius: var(--radius-card);
-      padding: 2.6rem 3rem 2.2rem;
-      box-shadow: var(--shadow-card);
-      border: 1px solid var(--border-light);
-      transition: all var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(108, 60, 255, 0.15);
+            border: 1px solid rgba(108, 60, 255, 0.2);
+            padding: 6px 18px 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gradient-2);
+            letter-spacing: 0.3px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        .header-badge i {
+            font-size: 0.7rem;
+        }
 
-    .card:hover {
-      box-shadow: var(--shadow-hover);
-    }
+        @keyframes badgePulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(108, 60, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px 4px rgba(108, 60, 255, 0.15);
+            }
+        }
 
-    /* Glow orbs – subtle premium feel */
-    .card::before,
-    .card::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.08;
-      pointer-events: none;
-      z-index: 0;
-      transition: opacity var(--transition);
-    }
-    .card::before {
-      width: 380px;
-      height: 380px;
-      background: var(--glow-1);
-      top: -120px;
-      right: -100px;
-    }
-    .card::after {
-      width: 320px;
-      height: 320px;
-      background: var(--glow-2);
-      bottom: -100px;
-      left: -80px;
-    }
-    .card>* {
-      position: relative;
-      z-index: 1;
-    }
+        .header h1 {
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #f0f4ff 0%, #a0b4d9 50%, #6c3cff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+            animation: titleFloat 6s ease-in-out infinite;
+        }
 
-    /* ===== Header ===== */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-bottom: 0.2rem;
-      gap: 0.8rem;
-    }
+        @keyframes titleFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 540px;
+            margin: 12px auto 0;
+            font-weight: 400;
+            line-height: 1.6;
+        }
 
-    .header h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-      transition: color var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        /* ── Upload Zone ── */
+        .upload-zone {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px dashed rgba(108, 60, 255, 0.25);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-zone::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: var(--radius);
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent, rgba(108, 60, 255, 0.2), transparent, rgba(59, 130, 246, 0.2), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: borderSpin 8s linear infinite;
+        }
 
-    .header h1 .badge {
-      background: linear-gradient(135deg, #1f5f7a, #0f4a62);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 0.2rem 1.2rem;
-      border-radius: 60px;
-      box-shadow: 0 4px 14px -2px rgba(20, 70, 100, 0.25);
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
+        @keyframes borderSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .upload-zone:hover {
+            border-color: var(--gradient-1);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: var(--shadow-glow);
+        }
+        .upload-zone.dragover {
+            border-color: var(--gradient-2);
+            background: rgba(108, 60, 255, 0.08);
+            transform: scale(1.02);
+        }
 
-    .theme-toggle {
-      background: var(--tag-bg);
-      border: 1px solid var(--tag-border);
-      border-radius: 60px;
-      padding: 0.35rem 1.2rem;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all var(--transition);
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-weight: 500;
-    }
-    .theme-toggle:hover {
-      transform: scale(1.04);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    }
+        .upload-zone .icon-wrap {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(108, 60, 255, 0.2), rgba(59, 130, 246, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            color: var(--gradient-2);
+            transition: var(--transition);
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+        .upload-zone:hover .icon-wrap {
+            transform: scale(1.12) rotate(-6deg);
+            box-shadow: 0 0 50px rgba(108, 60, 255, 0.2);
+        }
 
-    .subhead {
-      color: var(--text-secondary);
-      font-weight: 400;
-      font-size: 0.9rem;
-      margin-bottom: 1.8rem;
-      padding: 0.3rem 1.2rem 0.3rem 1.2rem;
-      border-left: 3px solid #3a8db5;
-      background: rgba(60, 140, 190, 0.04);
-      border-radius: 0 14px 14px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      transition: color var(--transition);
-    }
+        @keyframes iconFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
 
-    .subhead .pill {
-      background: rgba(30, 80, 110, 0.08);
-      padding: 0.1rem 1.2rem;
-      border-radius: 60px;
-      font-size: 0.65rem;
-      font-weight: 600;
-      color: #1a5777;
-      transition: all var(--transition);
-      letter-spacing: 0.3px;
-    }
-    [data-theme="dark"] .subhead .pill {
-      background: rgba(60, 140, 190, 0.12);
-      color: #8ac0dd;
-    }
+        .upload-zone h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .upload-zone p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .upload-zone .hint {
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
 
-    /* ===== Drop Zone ===== */
-    .drop-zone {
-      background: var(--drop-bg);
-      border: 2px dashed var(--drop-border);
-      border-radius: var(--radius-sm);
-      padding: 2.4rem 1.2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.35s ease;
-      backdrop-filter: blur(4px);
-      margin-bottom: 1.8rem;
-      position: relative;
-    }
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
 
-    .drop-zone:hover,
-    .drop-zone.dragover {
-      border-color: var(--drop-border-hover);
-      background: rgba(200, 228, 245, 0.18);
-      transform: scale(1.006);
-      box-shadow: 0 16px 40px -16px rgba(10, 60, 90, 0.10);
-    }
-    [data-theme="dark"] .drop-zone:hover,
-    [data-theme="dark"] .drop-zone.dragover {
-      background: rgba(40, 80, 120, 0.12);
-    }
+        /* ── Image Grid ── */
+        .image-grid-section {
+            margin-top: 40px;
+            display: none;
+            animation: fadeUp 0.6s ease;
+        }
+        .image-grid-section.visible {
+            display: block;
+        }
 
-    .drop-zone .icon-big {
-      font-size: 2.8rem;
-      display: block;
-      margin-bottom: 0.1rem;
-      transition: transform 0.4s ease;
-      opacity: 0.8;
-    }
-    .drop-zone:hover .icon-big {
-      transform: scale(1.06);
-    }
+        .grid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .grid-header .count {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .grid-header .count span {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+        .grid-header .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-    .drop-zone p {
-      font-weight: 550;
-      color: var(--text-primary);
-      font-size: 1.05rem;
-      transition: color var(--transition);
-    }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 100px;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .btn:hover::after {
+            opacity: 1;
+        }
 
-    .drop-zone small {
-      color: var(--text-secondary);
-      display: block;
-      margin-top: 4px;
-      font-size: 0.78rem;
-      opacity: 0.7;
-    }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(108, 60, 255, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 35px rgba(108, 60, 255, 0.5);
+        }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-glass);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+            transform: translateY(-2px);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 35px rgba(34, 197, 94, 0.5);
+        }
 
-    #fileInput {
-      display: none;
-    }
+        @keyframes successPulse {
+            0%,
+            100% {
+                box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 40px rgba(34, 197, 94, 0.5);
+            }
+        }
 
-    /* ===== File List ===== */
-    .file-list-wrapper {
-      background: rgba(240, 250, 255, 0.12);
-      backdrop-filter: blur(4px);
-      border-radius: var(--radius-xs);
-      padding: 0.7rem 1.2rem;
-      margin: 0.4rem 0 1.4rem;
-      border: 1px solid var(--border-light);
-      min-height: 72px;
-      transition: all var(--transition);
-    }
-    [data-theme="dark"] .file-list-wrapper {
-      background: rgba(20, 40, 60, 0.08);
-    }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 16px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding: 4px 4px 12px 4px;
+        }
 
-    .file-list {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 0.7rem 1rem;
-    }
+        .image-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--border-glass);
+            transition: var(--transition);
+            position: relative;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+        .image-card:hover {
+            border-color: rgba(108, 60, 255, 0.4);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+        .image-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(108, 60, 255, 0.05), transparent 60%);
+            background-size: 200% 200%;
+            animation: shineScan 4s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-    .file-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--tag-bg);
-      padding: 0.2rem 0.8rem 0.2rem 0.5rem;
-      border-radius: 60px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      border: 1px solid var(--tag-border);
-      box-shadow: 0 4px 12px rgba(0, 20, 30, 0.03);
-      cursor: grab;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-    .file-item:hover {
-      box-shadow: 0 6px 18px rgba(0, 20, 30, 0.06);
-      transform: translateY(-1px);
-    }
-    .file-item:active {
-      cursor: grabbing;
-    }
-    .file-item.dragging {
-      opacity: 0.25;
-      transform: scale(0.94);
-    }
-    .file-item .thumb {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      object-fit: cover;
-      background: #e0ecf3;
-      border: 1px solid var(--tag-border);
-      flex-shrink: 0;
-    }
-    .file-item .fname {
-      max-width: 120px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .file-item .drag-handle {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      opacity: 0.4;
-      cursor: grab;
-      padding: 0 2px;
-      font-weight: 300;
-    }
-    .file-item .remove {
-      cursor: pointer;
-      font-weight: 700;
-      color: #b13b3b;
-      font-size: 1.1rem;
-      line-height: 1;
-      transition: 0.15s;
-      opacity: 0.4;
-      padding: 0 4px;
-    }
-    .file-item .remove:hover {
-      opacity: 1;
-      transform: scale(1.3);
-      color: #b00;
-    }
-    .empty-list {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      opacity: 0.5;
-      padding: 0.3rem 0;
-    }
+        @keyframes shineScan {
+            0% {
+                background-position: -200% -200%;
+            }
+            100% {
+                background-position: 200% 200%;
+            }
+        }
 
-    /* ===== Controls ===== */
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem 1.4rem;
-      margin: 1rem 0 1.2rem;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 0.6rem 1.4rem;
-      border-radius: 60px;
-      backdrop-filter: blur(4px);
-      border: 1px solid var(--border-light);
-      transition: all var(--transition);
-    }
-    [data-theme="dark"] .controls {
-      background: rgba(20, 40, 60, 0.06);
-    }
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        .image-card .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            border: none;
+            color: #fff;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            z-index: 2;
+        }
+        .image-card:hover .remove-btn {
+            opacity: 1;
+        }
+        .image-card .remove-btn:hover {
+            background: #ef4444;
+            transform: scale(1.15) rotate(90deg);
+        }
+        .image-card .order-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 2px 10px;
+            border-radius: 100px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+            z-index: 2;
+        }
 
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .control-group label {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.3px;
-      transition: color var(--transition);
-    }
-    .control-group select,
-    .control-group input[type="text"] {
-      background: var(--input-bg);
-      border: 1px solid var(--input-border);
-      border-radius: 60px;
-      padding: 0.2rem 0.9rem;
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      outline: none;
-      transition: 0.15s;
-      min-width: 70px;
-    }
-    .control-group select:focus,
-    .control-group input[type="text"]:focus {
-      border-color: #1f7a9e;
-      box-shadow: 0 0 0 3px rgba(31, 122, 158, 0.10);
-    }
-    .control-group input[type="range"] {
-      width: 90px;
-      accent-color: #1f7a9e;
-      cursor: pointer;
-    }
-    .control-group .range-value {
-      font-weight: 600;
-      color: var(--text-primary);
-      min-width: 28px;
-      font-size: 0.75rem;
-    }
+        @keyframes cardPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
 
-    /* ===== Buttons ===== */
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin: 0.4rem 0 0.8rem;
-    }
+        .image-card:nth-child(1) {
+            animation-delay: 0.02s;
+        }
+        .image-card:nth-child(2) {
+            animation-delay: 0.05s;
+        }
+        .image-card:nth-child(3) {
+            animation-delay: 0.08s;
+        }
+        .image-card:nth-child(4) {
+            animation-delay: 0.11s;
+        }
+        .image-card:nth-child(5) {
+            animation-delay: 0.14s;
+        }
+        .image-card:nth-child(6) {
+            animation-delay: 0.17s;
+        }
+        .image-card:nth-child(7) {
+            animation-delay: 0.20s;
+        }
+        .image-card:nth-child(8) {
+            animation-delay: 0.23s;
+        }
+        .image-card:nth-child(9) {
+            animation-delay: 0.26s;
+        }
+        .image-card:nth-child(10) {
+            animation-delay: 0.29s;
+        }
+        .image-card:nth-child(11) {
+            animation-delay: 0.32s;
+        }
+        .image-card:nth-child(12) {
+            animation-delay: 0.35s;
+        }
 
-    .btn {
-      border: none;
-      background: white;
-      padding: 0.6rem 2rem;
-      border-radius: 80px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: #1b4157;
-      box-shadow: 0 4px 14px rgba(0, 30, 40, 0.04);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      border: 1px solid var(--border-light);
-      backdrop-filter: blur(4px);
-      background: rgba(255, 255, 255, 0.35);
-    }
-    [data-theme="dark"] .btn {
-      background: rgba(30, 50, 70, 0.35);
-      color: #d0e4ef;
-    }
+        /* ── Processing Overlay ── */
+        .processing-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(11, 14, 26, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease;
+        }
+        .processing-overlay.active {
+            display: flex;
+        }
 
-    .btn-primary {
-      background: var(--btn-primary);
-      color: white;
-      box-shadow: 0 10px 28px -10px #1a5777a0;
-      border: 1px solid #3b86a8;
-    }
-    .btn-primary:hover {
-      background: var(--btn-primary-hover);
-      transform: scale(1.03);
-      box-shadow: 0 14px 34px -12px #0f4a62b0;
-    }
-    .btn-primary:disabled {
-      opacity: 0.4;
-      pointer-events: none;
-      filter: grayscale(0.3);
-    }
+        .processing-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 48px 56px;
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            animation: scaleUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .processing-box::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(from 0deg, transparent, rgba(108, 60, 255, 0.05), transparent, rgba(59, 130, 246, 0.05), transparent);
+            animation: borderSpin 10s linear infinite;
+            pointer-events: none;
+        }
+        .processing-box .spinner {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            border: 4px solid rgba(108, 60, 255, 0.15);
+            border-top-color: var(--gradient-1);
+            border-right-color: var(--gradient-2);
+            animation: spin 0.9s linear infinite;
+            position: relative;
+            z-index: 1;
+        }
+        .processing-box .spinner::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 3px solid rgba(59, 130, 246, 0.1);
+            border-top-color: var(--gradient-3);
+            animation: spin 0.6s linear infinite reverse;
+        }
 
-    .btn-download {
-      background: var(--btn-download);
-      color: white;
-      box-shadow: 0 10px 28px -10px #1a7a5aa0;
-      border: 1px solid #3a9a6a;
-    }
-    .btn-download:hover {
-      background: var(--btn-download-hover);
-      transform: scale(1.03);
-      box-shadow: 0 14px 34px -12px #0f5a3ab0;
-    }
+        /* Ripple rings around spinner */
+        .processing-box .ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(108, 60, 255, 0.15);
+            animation: rippleOut 2.4s ease-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .processing-box .ripple:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+        .processing-box .ripple:nth-child(3) {
+            animation-delay: 1.6s;
+        }
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid #b6d2e3;
-    }
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.3);
-      border-color: #2a7f9e;
-      transform: scale(1.02);
-    }
-    [data-theme="dark"] .btn-outline {
-      border-color: #3a6a8a;
-    }
-    [data-theme="dark"] .btn-outline:hover {
-      background: rgba(40, 80, 120, 0.10);
-      border-color: #4a9ac0;
-    }
+        @keyframes rippleOut {
+            0% {
+                width: 72px;
+                height: 72px;
+                opacity: 0.8;
+                transform: translate(-50%, -50%);
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+                transform: translate(-50%, -50%);
+            }
+        }
 
-    .hidden {
-      display: none !important;
-    }
+        .processing-box h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+        .processing-box .status-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            min-height: 28px;
+            position: relative;
+            z-index: 1;
+        }
+        .processing-box .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        .processing-box .progress-track .bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(108, 60, 255, 0.3);
+            background-size: 200% 100%;
+            animation: barShine 2s linear infinite;
+        }
 
-    /* ===== Process Panel ===== */
-    .process-panel {
-      background: rgba(215, 238, 255, 0.12);
-      backdrop-filter: blur(8px);
-      border-radius: 60px;
-      padding: 0.8rem 1.8rem;
-      margin: 1.2rem 0 0.2rem;
-      border: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.2rem;
-      transition: all var(--transition);
-      min-height: 66px;
-    }
-    [data-theme="dark"] .process-panel {
-      background: rgba(20, 50, 80, 0.08);
-    }
+        @keyframes barShine {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
 
-    .progress-track {
-      flex: 1;
-      height: 6px;
-      background: var(--progress-bg);
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
-    }
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: var(--progress-fill);
-      border-radius: 30px;
-      transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 0 0 16px #3b9bc780;
-      position: relative;
-    }
-    .progress-fill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      animation: shimmer 1.8s infinite;
-    }
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
+        .processing-box .progress-label {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
 
-    .status-text {
-      font-weight: 500;
-      color: var(--text-primary);
-      min-width: 140px;
-      font-size: 0.88rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: color var(--transition);
-    }
+        /* ── Result ── */
+        .result-section {
+            display: none;
+            margin-top: 40px;
+            animation: fadeUp 0.6s ease;
+        }
+        .result-section.visible {
+            display: block;
+        }
+        .result-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 32px 40px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+        .result-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.05), transparent 70%);
+            pointer-events: none;
+        }
+        .result-card .check-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(22, 163, 74, 0.1));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #22c55e;
+            margin-bottom: 16px;
+            animation: checkPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-    .spinner-wave {
-      display: inline-flex;
-      gap: 3px;
-      align-items: center;
-      height: 18px;
-    }
-    .spinner-wave span {
-      display: inline-block;
-      width: 3px;
-      height: 100%;
-      background: var(--text-primary);
-      border-radius: 4px;
-      animation: wave 1s ease-in-out infinite;
-      opacity: 0.25;
-    }
-    .spinner-wave span:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-    .spinner-wave span:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-    .spinner-wave span:nth-child(4) {
-      animation-delay: 0.45s;
-    }
-    .spinner-wave span:nth-child(5) {
-      animation-delay: 0.6s;
-    }
-    @keyframes wave {
-      0%,
-      100% {
-        transform: scaleY(0.4);
-        opacity: 0.25;
-      }
-      50% {
-        transform: scaleY(1);
-        opacity: 1;
-      }
-    }
+        @keyframes checkPop {
+            0% {
+                transform: scale(0) rotate(-20deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
 
-    .counter-box {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--counter-bg);
-      padding: 0.15rem 1rem;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text-primary);
-      min-width: 56px;
-      border: 1px solid var(--border-light);
-      transition: all var(--transition);
-      font-variant-numeric: tabular-nums;
-    }
-    .counter-box .num {
-      display: inline-block;
-      transition: transform 0.2s;
-    }
-    @keyframes countPulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.16);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-    .pulse-count {
-      animation: countPulse 0.3s ease;
-    }
+        .result-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .result-card p {
+            color: var(--text-secondary);
+            margin-top: 4px;
+            font-size: 0.95rem;
+        }
+        .result-card .btn-group {
+            margin-top: 24px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    /* ===== Download Button Container ===== */
-    .download-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-      padding: 0.4rem 0;
-    }
+        /* Sparkle effect on result */
+        .sparkle-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.6);
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+        .sparkle:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0.2s;
+        }
+        .sparkle:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 0.7s;
+            width: 4px;
+            height: 4px;
+        }
+        .sparkle:nth-child(3) {
+            top: 30%;
+            right: 25%;
+            animation-delay: 1.2s;
+            width: 8px;
+            height: 8px;
+            background: rgba(108, 60, 255, 0.4);
+        }
+        .sparkle:nth-child(4) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 0.5s;
+            width: 5px;
+            height: 5px;
+            background: rgba(59, 130, 246, 0.5);
+        }
+        .sparkle:nth-child(5) {
+            top: 10%;
+            left: 50%;
+            animation-delay: 1.0s;
+            width: 7px;
+            height: 7px;
+            background: rgba(168, 85, 247, 0.4);
+        }
 
-    /* ===== Info Row ===== */
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      margin-top: 0.4rem;
-      padding: 0 0.5rem;
-      opacity: 0.55;
-      transition: color var(--transition);
-    }
+        @keyframes sparkleFloat {
+            0%,
+            100% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.2);
+                opacity: 0.9;
+            }
+        }
 
-    /* ===== Confetti Container ===== */
-    .confetti-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 30;
-      overflow: hidden;
-      border-radius: var(--radius-card);
-    }
-    .confetti {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      opacity: 0;
-      animation: confettiFall 2.2s ease-out forwards;
-    }
-    @keyframes confettiFall {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) rotate(0deg) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--tx), var(--ty)) rotate(720deg) scale(0);
-      }
-    }
+        /* ── Footer ── */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-glass);
+            padding-top: 28px;
+            letter-spacing: 0.2px;
+        }
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer a:hover {
+            color: var(--gradient-2);
+        }
 
-    /* ===== Footer ===== */
-    .footer {
-      margin-top: 1.8rem;
-      font-size: 0.7rem;
-      color: var(--footer-color);
-      text-align: center;
-      opacity: 0.55;
-      border-top: 1px solid var(--border-light);
-      padding-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.8rem;
-      flex-wrap: wrap;
-      transition: all var(--transition);
-    }
-    .footer span {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 0.05rem 1.2rem;
-      border-radius: 60px;
-      transition: background var(--transition);
-    }
+        /* ── Animations ── */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.92) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-    /* ===== Responsive ===== */
-    @media (max-width: 800px) {
-      .card {
-        padding: 1.8rem 1.4rem;
-        border-radius: 48px;
-      }
-      .header h1 {
-        font-size: 2rem;
-        flex-wrap: wrap;
-      }
-      .controls {
-        flex-direction: column;
-        align-items: stretch;
-        border-radius: 32px;
-        padding: 0.8rem 1.2rem;
-        gap: 0.5rem;
-      }
-      .control-group {
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      .action-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .btn {
-        justify-content: center;
-      }
-      .process-panel {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 0.7rem 1.2rem;
-        gap: 0.6rem;
-      }
-      .file-item .fname {
-        max-width: 70px;
-      }
-      .subhead {
-        font-size: 0.8rem;
-        padding: 0.2rem 0.8rem;
-      }
-    }
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 12px 40px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .header p {
+                font-size: 0.95rem;
+            }
+            .upload-zone {
+                padding: 40px 20px;
+            }
+            .upload-zone .icon-wrap {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+            .upload-zone h3 {
+                font-size: 1.1rem;
+            }
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                max-height: 320px;
+            }
+            .processing-box {
+                padding: 32px 24px;
+            }
+            .result-card {
+                padding: 24px 20px;
+            }
+            .grid-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .grid-header .actions {
+                justify-content: stretch;
+            }
+            .grid-header .actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+            .result-card .btn-group .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.2rem 0.8rem;
-        border-radius: 36px;
-      }
-      .header h1 {
-        font-size: 1.5rem;
-      }
-      .header h1 .badge {
-        font-size: 0.5rem;
-        padding: 0.1rem 0.7rem;
-      }
-      .drop-zone {
-        padding: 1.4rem 0.6rem;
-      }
-      .drop-zone p {
-        font-size: 0.85rem;
-      }
-      .drop-zone .icon-big {
-        font-size: 2.2rem;
-      }
-      .controls .control-group {
-        gap: 4px;
-      }
-      .control-group input[type="range"] {
-        width: 70px;
-      }
-      .file-item {
-        font-size: 0.7rem;
-        padding: 0.15rem 0.6rem 0.15rem 0.4rem;
-      }
-      .file-item .thumb {
-        width: 26px;
-        height: 26px;
-      }
-      .file-item .fname {
-        max-width: 50px;
-      }
-      .footer {
-        gap: 0.6rem;
-        font-size: 0.6rem;
-      }
-      .footer span {
-        padding: 0.05rem 0.6rem;
-      }
-      .status-text {
-        font-size: 0.8rem;
-        min-width: 100px;
-      }
-    }
-  </style>
+        @media (max-width: 480px) {
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 10px;
+            }
+            .image-card .remove-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 0.65rem;
+                top: 4px;
+                right: 4px;
+            }
+            .image-card .order-badge {
+                font-size: 0.6rem;
+                padding: 1px 8px;
+                bottom: 4px;
+                left: 4px;
+            }
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .processing-box .spinner {
+                width: 56px;
+                height: 56px;
+            }
+        }
+
+        /* ── Utility ── */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="card" id="appCard">
-    <!-- Confetti container -->
-    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="app-wrapper">
 
-    <!-- ===== Header ===== -->
-    <div class="header">
-      <div class="header-left">
-        <h1>
-          JPG → PDF
-          <span class="badge">pro</span>
-        </h1>
-      </div>
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-          <span id="themeIcon">🌙</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="subhead">
-      <span>Convert, reorder &amp; customize</span>
-      <span class="pill">drag to reorder</span>
-    </div>
-
-    <!-- ===== Drop Zone ===== -->
-    <div class="drop-zone" id="dropZone">
-      <span class="icon-big">📂</span>
-      <p>Drop images here or click to browse</p>
-      <small>JPG, JPEG, PNG · multiple files</small>
-      <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" multiple />
-    </div>
-
-    <!-- ===== File List ===== -->
-    <div class="file-list-wrapper">
-      <div class="file-list" id="fileList">
-        <span class="empty-list">No images added yet</span>
-      </div>
-    </div>
-
-    <!-- ===== Controls ===== -->
-    <div class="controls">
-      <div class="control-group">
-        <label>Page</label>
-        <select id="pageSizeSelect">
-          <option value="a4">A4</option>
-          <option value="letter">Letter</option>
-          <option value="legal">Legal</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Orientation</label>
-        <select id="orientationSelect">
-          <option value="portrait">Portrait</option>
-          <option value="landscape">Landscape</option>
-        </select>
-      </div>
-      <div class="control-group">
-        <label>Margin</label>
-        <input type="range" id="marginRange" min="0" max="40" value="10" />
-        <span class="range-value" id="marginLabel">10</span>
-      </div>
-      <div class="control-group">
-        <label>Quality</label>
-        <input type="range" id="qualityRange" min="0.3" max="1.0" step="0.05" value="0.92" />
-        <span class="range-value" id="qualityLabel">92%</span>
-      </div>
-      <div class="control-group">
-        <label>Name</label>
-        <input type="text" id="fileNameInput" value="converted" placeholder="myPDF" />
-      </div>
-    </div>
-
-    <!-- ===== Action Buttons ===== -->
-    <div class="action-row">
-      <button class="btn btn-outline" id="clearBtn">Clear all</button>
-      <button class="btn btn-primary" id="convertBtn">Convert</button>
-    </div>
-
-    <!-- ===== Process Panel ===== -->
-    <div id="processPanel" class="process-panel hidden">
-      <span class="status-text" id="statusText">
-        <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-        <span>Processing</span>
-      </span>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill" style="width:0%"></div>
-      </div>
-      <span class="counter-box" id="counterBox">
-        <span class="num" id="counterNum">0</span>%
-      </span>
-    </div>
-
-    <!-- ===== Download Button (shows after completion) ===== -->
-    <div class="download-container" id="downloadContainer">
-      <button class="btn btn-download hidden" id="downloadBtn">⬇ Download PDF</button>
-    </div>
-
-    <!-- ===== Info Row ===== -->
-    <div class="info-row" id="infoRow">
-      <span id="timeInfo">⏱️ —</span>
-      <span id="sizeInfo">📦 —</span>
-    </div>
-
-    <!-- ===== Footer ===== -->
-    <div class="footer">
-      <span>drag to reorder</span>
-      <span>page + margin</span>
-      <span>secure &amp; free</span>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      // ===== DOM refs =====
-      const dropZone = document.getElementById('dropZone');
-      const fileInput = document.getElementById('fileInput');
-      const fileListEl = document.getElementById('fileList');
-      const clearBtn = document.getElementById('clearBtn');
-      const convertBtn = document.getElementById('convertBtn');
-      const downloadBtn = document.getElementById('downloadBtn');
-      const processPanel = document.getElementById('processPanel');
-      const statusText = document.getElementById('statusText');
-      const progressFill = document.getElementById('progressFill');
-      const counterNum = document.getElementById('counterNum');
-      const pageSizeSelect = document.getElementById('pageSizeSelect');
-      const orientationSelect = document.getElementById('orientationSelect');
-      const marginRange = document.getElementById('marginRange');
-      const marginLabel = document.getElementById('marginLabel');
-      const qualityRange = document.getElementById('qualityRange');
-      const qualityLabel = document.getElementById('qualityLabel');
-      const fileNameInput = document.getElementById('fileNameInput');
-      const confettiContainer = document.getElementById('confettiContainer');
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = document.getElementById('themeIcon');
-      const timeInfo = document.getElementById('timeInfo');
-      const sizeInfo = document.getElementById('sizeInfo');
-      const downloadContainer = document.getElementById('downloadContainer');
-
-      // ===== State =====
-      let selectedFiles = [];
-      let dragIndex = null;
-      let startTime = 0;
-      let pdfBlobData = null; // store generated PDF for download
-
-      // ===== Theme =====
-      let darkMode = false;
-      try {
-        const saved = localStorage.getItem('theme');
-        if (saved === 'dark') { darkMode = true;
-          document.documentElement.setAttribute('data-theme', 'dark');
-          themeIcon.textContent = '☀️'; }
-      } catch (_) {}
-
-      function toggleTheme() {
-        darkMode = !darkMode;
-        document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-        themeIcon.textContent = darkMode ? '☀️' : '🌙';
-        try { localStorage.setItem('theme', darkMode ? 'dark' : 'light'); } catch (_) {}
-      }
-      themeToggle.addEventListener('click', toggleTheme);
-
-      // ===== Quality & Margin labels =====
-      qualityRange.addEventListener('input', () => {
-        qualityLabel.textContent = Math.round(parseFloat(qualityRange.value) * 100) + '%';
-      });
-      marginRange.addEventListener('input', () => {
-        marginLabel.textContent = marginRange.value;
-      });
-
-      // ===== Render file list =====
-      function renderFileList() {
-        if (selectedFiles.length === 0) {
-          fileListEl.innerHTML = `<span class="empty-list">No images added yet</span>`;
-          return;
-        }
-        let html = '';
-        selectedFiles.forEach((file, idx) => {
-          const name = file.name.length > 20 ? file.name.slice(0, 18) + '…' : file.name;
-          const thumbUrl = URL.createObjectURL(file);
-          html += `
-            <div class="file-item" draggable="true" data-index="${idx}">
-              <img class="thumb" src="${thumbUrl}" alt="${file.name}" />
-              <span class="drag-handle">⠿</span>
-              <span class="fname">${name}</span>
-              <span class="remove" data-index="${idx}">✕</span>
+        <!-- ─── HEADER ─── -->
+        <header class="header">
+            <div class="header-badge">
+                <i class="fa-solid fa-bolt"></i> Free &amp; Fast
             </div>
-          `;
-        });
-        fileListEl.innerHTML = html;
+            <h1>JPG to PDF</h1>
+            <p>Merge multiple JPG images into a single, beautiful PDF file — instantly in your browser.</p>
+        </header>
 
-        // Remove events
-        document.querySelectorAll('.file-item .remove').forEach(el => {
-          el.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const idx = parseInt(this.getAttribute('data-index'), 10);
-            if (!isNaN(idx) && idx >= 0 && idx < selectedFiles.length) {
-              selectedFiles.splice(idx, 1);
-              renderFileList();
-              resetUI();
-              updateInfo();
+        <!-- ─── UPLOAD ZONE ─── -->
+        <section class="upload-zone" id="uploadZone">
+            <div class="icon-wrap">
+                <i class="fa-regular fa-image"></i>
+            </div>
+            <h3>Drop your images here</h3>
+            <p>or click to browse &amp; select JPG files</p>
+            <div class="hint">
+                <i class="fa-regular fa-circle-check"></i> Supports multiple JPG &amp; JPEG
+            </div>
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,image/jpeg" multiple />
+        </section>
+
+        <!-- ─── IMAGE GRID ─── -->
+        <section class="image-grid-section" id="imageGridSection">
+            <div class="grid-header">
+                <div class="count">
+                    <i class="fa-regular fa-images"></i> <span id="imageCount">0</span> images
+                </div>
+                <div class="actions">
+                    <button class="btn btn-secondary" id="addMoreBtn">
+                        <i class="fa-regular fa-plus"></i> Add More
+                    </button>
+                    <button class="btn btn-danger" id="clearAllBtn">
+                        <i class="fa-regular fa-trash-alt"></i> Clear All
+                    </button>
+                    <button class="btn btn-primary" id="convertBtn">
+                        <i class="fa-regular fa-file-pdf"></i> Convert to PDF
+                    </button>
+                </div>
+            </div>
+            <div class="image-grid" id="imageGrid"></div>
+        </section>
+
+        <!-- ─── RESULT ─── -->
+        <section class="result-section" id="resultSection">
+            <div class="result-card">
+                <div class="sparkle-container">
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                    <div class="sparkle"></div>
+                </div>
+                <div class="check-icon">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <h4>PDF Ready!</h4>
+                <p>Your PDF has been created with <span id="resultCount">0</span> images.</p>
+                <div class="btn-group">
+                    <button class="btn btn-success" id="downloadBtn">
+                        <i class="fa-regular fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-secondary" id="resetBtn">
+                        <i class="fa-regular fa-rotate-right"></i> Convert More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PROCESSING OVERLAY ─── -->
+        <div class="processing-overlay" id="processingOverlay">
+            <div class="processing-box">
+                <div class="ripple" style="position:absolute; top:50%; left:50%;"></div>
+                <div class="ripple" style="position:absolute; top:50%; left:50%;"></div>
+                <div class="ripple" style="position:absolute; top:50%; left:50%;"></div>
+                <div class="spinner"></div>
+                <h4>Processing Images</h4>
+                <p class="status-text" id="statusText">Preparing your images…</p>
+                <div class="progress-track">
+                    <div class="bar" id="progressBar"></div>
+                </div>
+                <div class="progress-label" id="progressLabel">0%</div>
+            </div>
+        </div>
+
+        <!-- ─── FOOTER ─── -->
+        <footer class="footer">
+            <p>
+                <i class="fa-regular fa-lock"></i> 100% client-side &bull; Your files never leave your device
+                &bull; <a href="#" aria-label="About this tool">About</a>
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ── DOM refs ──
+            const uploadZone = document.getElementById('uploadZone');
+            const fileInput = document.getElementById('fileInput');
+            const imageGridSection = document.getElementById('imageGridSection');
+            const imageGrid = document.getElementById('imageGrid');
+            const imageCount = document.getElementById('imageCount');
+            const convertBtn = document.getElementById('convertBtn');
+            const clearAllBtn = document.getElementById('clearAllBtn');
+            const addMoreBtn = document.getElementById('addMoreBtn');
+            const processingOverlay = document.getElementById('processingOverlay');
+            const statusText = document.getElementById('statusText');
+            const progressBar = document.getElementById('progressBar');
+            const progressLabel = document.getElementById('progressLabel');
+            const resultSection = document.getElementById('resultSection');
+            const resultCount = document.getElementById('resultCount');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // ── State ──
+            let imageFiles = [];
+            let imageDataURLs = [];
+            let pdfBlob = null;
+            let isProcessing = false;
+
+            // ── Helpers ──
+            function updateUI() {
+                const count = imageFiles.length;
+                imageCount.textContent = count;
+
+                if (count === 0) {
+                    imageGridSection.classList.remove('visible');
+                    resultSection.classList.remove('visible');
+                    uploadZone.style.display = 'block';
+                } else {
+                    imageGridSection.classList.add('visible');
+                    uploadZone.style.display = 'none';
+                }
+
+                convertBtn.disabled = count === 0 || isProcessing;
+                renderGrid();
             }
-          });
-        });
 
-        // Drag events
-        const items = document.querySelectorAll('.file-item');
-        items.forEach(item => {
-          item.addEventListener('dragstart', handleDragStart);
-          item.addEventListener('dragenter', handleDragEnter);
-          item.addEventListener('dragover', handleDragOver);
-          item.addEventListener('dragleave', handleDragLeave);
-          item.addEventListener('drop', handleDrop);
-          item.addEventListener('dragend', handleDragEnd);
-        });
+            function renderGrid() {
+                imageGrid.innerHTML = '';
+                imageFiles.forEach((file, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'image-card';
 
-        setTimeout(() => {
-          document.querySelectorAll('.file-item .thumb').forEach(img => {
-            URL.revokeObjectURL(img.src);
-          });
-        }, 120);
+                    const img = document.createElement('img');
+                    img.src = imageDataURLs[index] || '';
+                    img.alt = file.name;
+                    img.loading = 'lazy';
 
-        updateInfo();
-      }
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-btn';
+                    removeBtn.innerHTML = '<i class="fa-regular fa-xmark"></i>';
+                    removeBtn.setAttribute('aria-label', 'Remove image');
+                    removeBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        removeImage(index);
+                    });
 
-      // ===== Drag handlers =====
-      function handleDragStart(e) {
-        const idx = parseInt(this.getAttribute('data-index'), 10);
-        dragIndex = idx;
-        this.classList.add('dragging');
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/plain', idx);
-      }
+                    const badge = document.createElement('span');
+                    badge.className = 'order-badge';
+                    badge.textContent = '#' + (index + 1);
 
-      function handleDragEnter(e) {
-        e.preventDefault();
-        this.classList.add('drag-over');
-      }
+                    card.appendChild(img);
+                    card.appendChild(removeBtn);
+                    card.appendChild(badge);
+                    imageGrid.appendChild(card);
+                });
+            }
 
-      function handleDragOver(e) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = 'move';
-      }
+            function removeImage(index) {
+                imageFiles.splice(index, 1);
+                imageDataURLs.splice(index, 1);
+                updateUI();
+                resultSection.classList.remove('visible');
+                pdfBlob = null;
+            }
 
-      function handleDragLeave(e) {
-        this.classList.remove('drag-over');
-      }
+            function clearAll() {
+                imageFiles = [];
+                imageDataURLs = [];
+                pdfBlob = null;
+                resultSection.classList.remove('visible');
+                updateUI();
+            }
 
-      function handleDrop(e) {
-        e.preventDefault();
-        this.classList.remove('drag-over');
-        const fromIdx = parseInt(e.dataTransfer.getData('text/plain'), 10);
-        const toIdx = parseInt(this.getAttribute('data-index'), 10);
-        if (!isNaN(fromIdx) && !isNaN(toIdx) && fromIdx !== toIdx) {
-          const [moved] = selectedFiles.splice(fromIdx, 1);
-          selectedFiles.splice(toIdx, 0, moved);
-          renderFileList();
-          resetUI();
-        }
-        dragIndex = null;
-      }
+            // ── Load images ──
+            function loadFiles(files) {
+                const validFiles = Array.from(files).filter(f =>
+                    f.type === 'image/jpeg' || f.name.match(/\.jpe?g$/i)
+                );
 
-      function handleDragEnd(e) {
-        this.classList.remove('dragging');
-        document.querySelectorAll('.file-item').forEach(el => el.classList.remove('drag-over'));
-      }
+                if (validFiles.length === 0) {
+                    statusText.textContent = 'Please select JPG / JPEG images only.';
+                    setTimeout(() => { statusText.textContent = 'Preparing your images…'; }, 2000);
+                    return;
+                }
 
-      // ===== Reset UI (hide process, download, reset progress) =====
-      function resetUI() {
-        processPanel.classList.add('hidden');
-        downloadBtn.classList.add('hidden');
-        progressFill.style.width = '0%';
-        counterNum.textContent = '0';
-        counterNum.classList.remove('pulse-count');
-        statusText.innerHTML = `
-          <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-          <span>Processing</span>
-        `;
-        timeInfo.textContent = '⏱️ —';
-        sizeInfo.textContent = '📦 —';
-        pdfBlobData = null;
-        convertBtn.disabled = false;
-        convertBtn.textContent = 'Convert';
-      }
+                let loaded = 0;
+                const total = validFiles.length;
 
-      function updateCounter(value) {
-        const clamped = Math.min(100, Math.max(0, Math.round(value)));
-        counterNum.textContent = clamped;
-        counterNum.classList.remove('pulse-count');
-        void counterNum.offsetWidth;
-        counterNum.classList.add('pulse-count');
-      }
+                validFiles.forEach((file) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imageFiles.push(file);
+                        imageDataURLs.push(e.target.result);
+                        loaded++;
+                        if (loaded === total) {
+                            updateUI();
+                            imageGridSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    };
+                    reader.onerror = () => {
+                        loaded++;
+                        if (loaded === total) updateUI();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
 
-      function updateInfo() {
-        const total = selectedFiles.reduce((acc, f) => acc + f.size, 0);
-        if (total > 0) {
-          sizeInfo.textContent = `📦 ${(total / 1024 / 1024).toFixed(2)} MB`;
-        } else {
-          sizeInfo.textContent = '📦 —';
-        }
-      }
-
-      // ===== File handler =====
-      function handleFiles(files) {
-        const allowed = ['image/jpeg', 'image/png', 'image/jpg'];
-        let added = 0;
-        for (const f of files) {
-          if (allowed.includes(f.type) || f.name.match(/\.(jpe?g|png)$/i)) {
-            selectedFiles.push(f);
-            added++;
-          }
-        }
-        if (added > 0) {
-          renderFileList();
-          resetUI();
-        } else {
-          alert('Only JPG, JPEG, PNG files are supported.');
-        }
-      }
-
-      // ===== Drop / Click =====
-      dropZone.addEventListener('click', () => fileInput.click());
-      dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-      });
-      dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-      dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
-      });
-      fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length) handleFiles(e.target.files);
-        fileInput.value = '';
-      });
-
-      clearBtn.addEventListener('click', () => {
-        selectedFiles = [];
-        renderFileList();
-        resetUI();
-        confettiContainer.innerHTML = '';
-        updateInfo();
-      });
-
-      // ===== Confetti effect =====
-      function fireConfetti() {
-        const container = confettiContainer;
-        container.innerHTML = '';
-        const colors = ['#ffd966', '#ffb347', '#ff8a5c', '#a8e6cf', '#88d8f7', '#f7a1c4', '#b4a7d6', '#ff6b6b', '#6bcbff'];
-        for (let i = 0; i < 80; i++) {
-          const el = document.createElement('div');
-          el.className = 'confetti';
-          const size = 5 + Math.random() * 12;
-          const x = Math.random() * 100;
-          const y = Math.random() * 100;
-          const tx = (Math.random() - 0.5) * 500;
-          const ty = (Math.random() - 0.5) * 500 + 120;
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          const isCircle = Math.random() > 0.5;
-          el.style.cssText = `
-            left:${x}%; top:${y}%;
-            width:${size}px; height:${size * (0.25 + Math.random() * 0.75)}px;
-            background:${color};
-            --tx:${tx}px; --ty:${ty}px;
-            animation-duration:${1.4 + Math.random() * 0.8}s;
-            border-radius:${isCircle ? '50%' : '2px'};
-            box-shadow: 0 0 18px ${color}66;
-          `;
-          container.appendChild(el);
-        }
-        setTimeout(() => { container.innerHTML = ''; }, 2800);
-      }
-
-      // ===== DOWNLOAD BUTTON HANDLER =====
-      downloadBtn.addEventListener('click', function() {
-        if (pdfBlobData) {
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(pdfBlobData);
-          const baseName = fileNameInput.value.trim() || 'converted';
-          link.download = `${baseName}.pdf`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          setTimeout(() => URL.revokeObjectURL(link.href), 3000);
-        }
-      });
-
-      // ===== MAIN CONVERTER =====
-      convertBtn.addEventListener('click', async function() {
-        if (selectedFiles.length === 0) {
-          alert('Please add at least one image.');
-          return;
-        }
-
-        // Reset download state
-        downloadBtn.classList.add('hidden');
-        pdfBlobData = null;
-
-        convertBtn.disabled = true;
-        convertBtn.textContent = '⏳ Processing...';
-        startTime = performance.now();
-
-        processPanel.classList.remove('hidden');
-        statusText.innerHTML = `
-          <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-          <span>Loading</span>
-        `;
-        progressFill.style.width = '0%';
-        updateCounter(0);
-
-        try {
-          const total = selectedFiles.length;
-          const imageDataArray = [];
-          const quality = parseFloat(qualityRange.value);
-          const margin = parseInt(marginRange.value) || 0;
-
-          // 1. Load images (0% → 30%)
-          for (let i = 0; i < total; i++) {
-            const file = selectedFiles[i];
-            const img = new Image();
-            const objectURL = URL.createObjectURL(file);
-            img.src = objectURL;
-
-            await new Promise((resolve, reject) => {
-              img.onload = () => {
-                const pct = Math.round(((i + 1) / total) * 30);
-                progressFill.style.width = pct + '%';
-                updateCounter(pct);
-                statusText.innerHTML = `
-                  <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-                  <span>Loading ${i+1}/${total}</span>
-                `;
-                resolve();
-              };
-              img.onerror = () => {
-                URL.revokeObjectURL(objectURL);
-                reject(new Error(`Failed: ${file.name}`));
-              };
+            // ── File input handler ──
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    loadFiles(e.target.files);
+                }
+                fileInput.value = '';
             });
 
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            imageDataArray.push(canvas.toDataURL('image/jpeg', quality));
-            URL.revokeObjectURL(objectURL);
-          }
-
-          // 2. PDF generation (30% → 92%)
-          statusText.innerHTML = `
-            <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-            <span>Building PDF</span>
-          `;
-          progressFill.style.width = '30%';
-          updateCounter(30);
-
-          const { jsPDF } = window.jspdf;
-          const pageSize = pageSizeSelect.value;
-          const orientation = orientationSelect.value;
-          let format = pageSize;
-          if (pageSize === 'letter') format = 'letter';
-          else if (pageSize === 'legal') format = 'legal';
-          else format = 'a4';
-
-          const pdf = new jsPDF({
-            orientation: orientation,
-            unit: 'pt',
-            format: format
-          });
-
-          const pageWidth = pdf.internal.pageSize.getWidth();
-          const pageHeight = pdf.internal.pageSize.getHeight();
-          const marginPts = margin * 2.83;
-
-          for (let i = 0; i < imageDataArray.length; i++) {
-            const img = new Image();
-            img.src = imageDataArray[i];
-            await new Promise((resolve) => {
-              img.onload = () => {
-                let w = img.width,
-                  h = img.height;
-                const availW = pageWidth - marginPts * 2;
-                const availH = pageHeight - marginPts * 2;
-                const ratio = Math.min(availW / w, availH / h);
-                const dw = w * ratio,
-                  dh = h * ratio;
-                const dx = (pageWidth - dw) / 2;
-                const dy = (pageHeight - dh) / 2;
-                if (i > 0) pdf.addPage();
-                pdf.addImage(img, 'JPEG', dx, dy, dw, dh);
-                resolve();
-              };
-              img.onerror = () => resolve();
+            // ── Drag & Drop ──
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+            uploadZone.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+            });
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length) {
+                    loadFiles(e.dataTransfer.files);
+                }
             });
 
-            const pct = 30 + Math.round(((i + 1) / imageDataArray.length) * 62);
-            const clamped = Math.min(pct, 94);
-            progressFill.style.width = clamped + '%';
-            updateCounter(clamped);
-            statusText.innerHTML = `
-              <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-              <span>Page ${i+1}/${imageDataArray.length}</span>
-            `;
-          }
+            // ── Add more ──
+            addMoreBtn.addEventListener('click', () => {
+                fileInput.click();
+            });
 
-          // 3. Finalize
-          statusText.innerHTML = `
-            <span class="spinner-wave"><span></span><span></span><span></span><span></span><span></span></span>
-            <span>Finalizing</span>
-          `;
-          progressFill.style.width = '96%';
-          updateCounter(96);
-          await new Promise(r => setTimeout(r, 300));
+            // ── Clear all ──
+            clearAllBtn.addEventListener('click', clearAll);
 
-          // === Store PDF blob for download ===
-          pdfBlobData = pdf.output('blob');
+            // ── Convert ──
+            convertBtn.addEventListener('click', startConversion);
 
-          // Complete
-          progressFill.style.width = '100%';
-          updateCounter(100);
-          const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
-          timeInfo.textContent = `⏱️ ${elapsed}s`;
-          sizeInfo.textContent = `📦 ${(pdfBlobData.size / 1024 / 1024).toFixed(2)} MB`;
-          statusText.innerHTML = `✅ Done! ${selectedFiles.length} images`;
+            async function startConversion() {
+                if (isProcessing || imageFiles.length === 0) return;
+                isProcessing = true;
+                convertBtn.disabled = true;
 
-          // Show download button
-          downloadBtn.classList.remove('hidden');
+                processingOverlay.classList.add('active');
+                progressBar.style.width = '0%';
+                progressLabel.textContent = '0%';
+                statusText.textContent = 'Loading images…';
 
-          // Fire confetti!
-          fireConfetti();
+                try {
+                    const images = [];
+                    const total = imageDataURLs.length;
 
-          // Reset convert button
-          convertBtn.disabled = false;
-          convertBtn.textContent = 'Convert';
+                    for (let i = 0; i < total; i++) {
+                        statusText.textContent = `Loading image ${i + 1} of ${total}…`;
+                        const img = await loadImage(imageDataURLs[i]);
+                        images.push(img);
+                        const pct = Math.round(((i + 1) / total) * 40);
+                        progressBar.style.width = pct + '%';
+                        progressLabel.textContent = pct + '%';
+                    }
 
-        } catch (error) {
-          console.error(error);
-          statusText.innerHTML = `❌ Error: ${error.message || 'conversion failed'}`;
-          progressFill.style.width = '0%';
-          updateCounter(0);
-          alert('Something went wrong. Please try again.');
-          convertBtn.disabled = false;
-          convertBtn.textContent = 'Convert';
-        }
-      });
+                    statusText.textContent = 'Generating PDF…';
+                    progressBar.style.width = '45%';
+                    progressLabel.textContent = '45%';
 
-      // ===== Init =====
-      renderFileList();
-      resetUI();
-      updateInfo();
-    })();
-  </script>
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const pageHeight = pdf.internal.pageSize.getHeight();
+
+                    for (let i = 0; i < images.length; i++) {
+                        const img = images[i];
+                        const imgWidth = img.naturalWidth || img.width;
+                        const imgHeight = img.naturalHeight || img.height;
+                        const ratio = Math.min(pageWidth / imgWidth, pageHeight / imgHeight);
+                        const w = imgWidth * ratio;
+                        const h = imgHeight * ratio;
+                        const x = (pageWidth - w) / 2;
+                        const y = (pageHeight - h) / 2;
+
+                        if (i > 0) pdf.addPage();
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = imgWidth;
+                        canvas.height = imgHeight;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+                        pdf.addImage(dataUrl, 'JPEG', x, y, w, h);
+
+                        const pct = 45 + Math.round(((i + 1) / images.length) * 50);
+                        progressBar.style.width = pct + '%';
+                        progressLabel.textContent = pct + '%';
+                        statusText.textContent = `Adding page ${i + 1} of ${images.length}…`;
+                    }
+
+                    statusText.textContent = 'Finalizing PDF…';
+                    progressBar.style.width = '98%';
+                    progressLabel.textContent = '98%';
+
+                    pdfBlob = pdf.output('blob');
+                    progressBar.style.width = '100%';
+                    progressLabel.textContent = '100%';
+                    statusText.textContent = '✅ Done!';
+
+                    setTimeout(() => {
+                        processingOverlay.classList.remove('active');
+                        resultCount.textContent = images.length;
+                        resultSection.classList.add('visible');
+                        resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        isProcessing = false;
+                        convertBtn.disabled = false;
+                    }, 400);
+
+                } catch (err) {
+                    console.error(err);
+                    statusText.textContent = '❌ Error: ' + (err.message || 'Something went wrong');
+                    progressBar.style.width = '0%';
+                    progressLabel.textContent = 'Error';
+                    setTimeout(() => {
+                        processingOverlay.classList.remove('active');
+                        isProcessing = false;
+                        convertBtn.disabled = false;
+                    }, 2000);
+                }
+            }
+
+            function loadImage(dataURL) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error('Failed to load image'));
+                    img.src = dataURL;
+                });
+            }
+
+            // ── Download ──
+            downloadBtn.addEventListener('click', () => {
+                if (!pdfBlob) return;
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(pdfBlob);
+                link.download = 'converted-images.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+            });
+
+            // ── Reset ──
+            resetBtn.addEventListener('click', () => {
+                resultSection.classList.remove('visible');
+                pdfBlob = null;
+                imageGridSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            // ── Keyboard shortcut ──
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && processingOverlay.classList.contains('active')) {
+                    if (!isProcessing) {
+                        processingOverlay.classList.remove('active');
+                    }
+                }
+            });
+
+            // ── Init ──
+            updateUI();
+
+        })();
+    </script>
 
 </body>
 </html>
