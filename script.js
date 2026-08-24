@@ -62,7 +62,8 @@
 
             const removeBtn = document.createElement('button');
             removeBtn.className = 'remove-btn';
-            removeBtn.innerHTML = '<i class="fa-regular fa-xmark" aria-hidden="true"></i>';
+            // স্পষ্ট সলিড ক্রস আইকন
+            removeBtn.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
             removeBtn.setAttribute('aria-label', 'Remove file ' + (index + 1));
             removeBtn.setAttribute('type', 'button');
             removeBtn.addEventListener('click', (e) => {
