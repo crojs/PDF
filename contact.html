@@ -21,13 +21,26 @@
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="main-container">
         <header class="header">
-            <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-file-export"></i></div><span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span></a>
+            <a href="index.html" class="logo" aria-label="onPDF Home">
+                <div class="logo-icon"><i class="fas fa-file-export"></i></div>
+                <span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span>
+            </a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
-            <nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="privacy-policy.html"><i class="fas fa-shield"></i> Privacy Policy</a>
+            </nav>
             <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
+        <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
         <main class="contact-content">
             <h1>Contact Us</h1>
             <p>We'd love to hear from you! Whether you have a question, suggestion, or just want to say hello, feel free to reach out.</p>
@@ -36,12 +49,18 @@
                 <li><strong>Response Time:</strong> We typically respond within 24-48 hours.</li>
             </ul>
         </main>
+
         <footer class="footer">
-            <div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+            </div>
             <p class="footer-text">&copy; <span class="dynamic-year">2025</span> <a href="index.html">onPDF</a></p>
         </footer>
     </div>
     <script src="script.js"></script>
-    <script>document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());</script>
 </body>
 </html>

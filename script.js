@@ -4,46 +4,48 @@
     // ডাইনামিক বছর
     document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());
 
-    // মোবাইল নেভিগেশন টগল (সব পেজে কাজ করবে)
+    // মোবাইল ড্রয়ার মেনু
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
+    const menuOverlay = document.getElementById('menuOverlay');
+
     if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            const isOpen = navLinks.classList.toggle('open');
-            navToggle.classList.toggle('active', isOpen);
-            navToggle.setAttribute('aria-expanded', isOpen);
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('open');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
+        function openMenu() {
+            navLinks.classList.add('open');
+            navToggle.classList.add('active');
+            navToggle.setAttribute('aria-expanded', 'true');
+            if (menuOverlay) menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+            if (menuOverlay) menuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (navLinks.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
             }
-        });
+        }
 
+        navToggle.addEventListener('click', toggleMenu);
+        if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
-                navLinks.classList.remove('open');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) closeMenu();
         });
     }
 
-    // টুল উপাদান পাওয়া গেলে তবেই টুল কোড চালানো হবে
+    // টুল উপাদান
     const uploadZone = document.getElementById('uploadZone');
     if (!uploadZone) return;
 
     const fileInput = document.getElementById('fileInput');
+    const btnBrowse = document.getElementById('btnBrowse');
     const imageGrid = document.getElementById('imageGrid');
     const imageListSection = document.getElementById('imageListSection');
     const settingsSection = document.getElementById('settingsSection');
@@ -178,6 +180,13 @@
         }
         if (validCount > 0) { renderImageGrid(); updateSectionVisibility(); showToast(`${validCount} image(s) added.`, 'success'); }
         else if (skippedCount > 0) showToast('No valid JPG images found.', 'error');
+    }
+
+    if (btnBrowse) {
+        btnBrowse.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!isProcessing) fileInput.click();
+        });
     }
 
     uploadZone.addEventListener('click', () => { if (!isProcessing) fileInput.click(); });

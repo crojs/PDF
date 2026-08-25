@@ -21,29 +21,55 @@
     <div class="bg-grid" aria-hidden="true"></div>
     <div class="main-container">
         <header class="header">
-            <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-file-export"></i></div><span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span></a>
+            <a href="index.html" class="logo" aria-label="onPDF Home">
+                <div class="logo-icon"><i class="fas fa-file-export"></i></div>
+                <span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span>
+            </a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
-            <nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="privacy-policy.html"><i class="fas fa-shield"></i> Privacy Policy</a>
+            </nav>
             <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
+        <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
         <main class="policy-content">
             <h1>Privacy Policy</h1>
             <p><strong>Last Updated:</strong> <span id="policyDate"></span></p>
             <h2>1. Introduction</h2>
-            <p>Welcome to onPDF ("we," "our," or "us"). We respect your privacy and are committed to protecting it...</p>
-            <!-- বাকি কনটেন্ট -->
+            <p>Welcome to onPDF ("we," "our," or "us"). We respect your privacy and are committed to protecting it. This Privacy Policy explains how we collect, use, and safeguard your information when you use our website.</p>
+            <h2>2. Information We Collect</h2>
+            <p>Our JPG to PDF converter processes all files locally in your browser. We do not collect, store, or upload any of your images or files. The only data we may collect is standard website analytics (such as page views).</p>
+            <h2>3. Cookies</h2>
+            <p>We may use cookies to enhance your experience. You can disable cookies in your browser settings.</p>
+            <h2>4. Third-Party Services</h2>
+            <p>We may use third-party services like Google Fonts or analytics that have their own privacy policies.</p>
+            <h2>5. Contact Us</h2>
+            <p>If you have questions, contact us at: <a href="mailto:support@onpdf.netlify.app">support@onpdf.netlify.app</a></p>
         </main>
+
         <footer class="footer">
-            <div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+                <a href="about.html">About</a>
+                <a href="blog.html">Blog</a>
+            </div>
             <p class="footer-text">&copy; <span class="dynamic-year">2025</span> <a href="index.html">onPDF</a></p>
         </footer>
     </div>
     <script src="script.js"></script>
     <script>
         document.getElementById('policyDate').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());
     </script>
 </body>
 </html>

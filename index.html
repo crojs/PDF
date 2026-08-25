@@ -87,13 +87,17 @@
                 <span class="hamburger-line"></span>
             </button>
             <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="privacy-policy.html"><i class="fas fa-shield"></i> Privacy Policy</a>
             </nav>
             <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
+
+        <!-- মোবাইল মেনু ওভারলে -->
+        <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
 
         <section class="hero" aria-labelledby="hero-title">
             <h1 class="hero-title" id="hero-title">Convert <span class="gradient-text">JPG Images</span> to PDF</h1>
@@ -111,10 +115,13 @@
                 <div class="upload-zone-inner">
                     <div class="upload-icon-wrap"><i class="fas fa-cloud-arrow-up"></i></div>
                     <h2 class="upload-title">Drag &amp; Drop Your JPG Files</h2>
-                    <p class="upload-desc">or click anywhere in this box to browse</p>
+                    <p class="upload-desc">or click to <span class="accent-text">browse files</span></p>
+                    <button class="btn-browse" type="button" id="btnBrowse" aria-label="Browse files">
+                        <i class="fas fa-folder-open"></i> Choose Images
+                    </button>
                     <p class="upload-hint"><strong>JPG, JPEG, PNG</strong> &bull; Up to <strong>50 images</strong> &bull; Max <strong>25MB</strong> each</p>
                 </div>
-                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,image/jpeg,image/png" multiple aria-hidden="true" tabindex="-1">
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,image/jpeg,image/png" multiple aria-hidden="true" tabindex="-1" style="display:none;">
             </div>
         </section>
 
@@ -209,8 +216,5 @@
     <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
     <script src="script.js"></script>
-    <script>
-        document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());
-    </script>
 </body>
 </html>

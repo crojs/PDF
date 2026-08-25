@@ -31,17 +31,21 @@
                 <span class="hamburger-line"></span>
             </button>
             <nav class="nav-links" id="navLinks" aria-label="Main navigation">
-                <a href="index.html">Home</a>
-                <a href="blog.html">Blog</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html"><i class="fas fa-house"></i> Home</a>
+                <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="privacy-policy.html"><i class="fas fa-shield"></i> Privacy Policy</a>
             </nav>
             <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
+        <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+
         <section class="blog-hero">
             <h1>JPG to PDF Guides &amp; Articles</h1>
             <p>Helpful tips, step-by-step tutorials, and in-depth guides to get the most out of your PDF conversions.</p>
         </section>
+
         <section class="blog-grid">
             <article class="blog-card">
                 <h2><a href="how-to-convert-jpg-to-pdf.html">How to Convert Multiple JPG Images to a Single PDF – Step by Step</a></h2>
@@ -74,6 +78,7 @@
                 <a href="pdf-compression-guide.html" class="read-more">Read More →</a>
             </article>
         </section>
+
         <footer class="footer">
             <div class="footer-links">
                 <a href="privacy-policy.html">Privacy Policy</a>
@@ -86,6 +91,5 @@
         </footer>
     </div>
     <script src="script.js"></script>
-    <script>document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());</script>
 </body>
 </html>
