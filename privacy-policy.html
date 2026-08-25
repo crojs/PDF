@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=20260825" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260825" />
+    <link rel="shortcut icon" href="/favicon.ico?v=20260825" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260825" />
+    <meta name="apple-mobile-web-app-title" content="onPDF" />
+    <link rel="manifest" href="/site.webmanifest?v=20260825" />
+    <title>Privacy Policy - onPDF</title>
+    <meta name="description" content="Privacy Policy for onPDF - Learn how we handle your data.">
+    <link rel="canonical" href="https://onpdf.netlify.app/privacy-policy.html">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-orbs" aria-hidden="true"><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="main-container">
+        <header class="header">
+            <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-file-export"></i></div><span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span></a>
+            <nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+        </header>
+        <main class="policy-content">
+            <h1>Privacy Policy</h1>
+            <p><strong>Last Updated:</strong> <span id="policyDate"></span></p>
+            <h2>1. Introduction</h2>
+            <p>Welcome to onPDF ("we," "our," or "us"). We respect your privacy and are committed to protecting it. This Privacy Policy explains how we collect, use, and safeguard your information when you use our website.</p>
+            <h2>2. Information We Collect</h2>
+            <p>Our JPG to PDF converter processes all files locally in your browser. We do not collect, store, or upload any of your images or files. The only data we may collect is standard website analytics (such as page views).</p>
+            <h2>3. Cookies</h2>
+            <p>We may use cookies to enhance your experience. You can disable cookies in your browser settings.</p>
+            <h2>4. Third-Party Services</h2>
+            <p>We may use third-party services like Google Fonts or analytics that have their own privacy policies.</p>
+            <h2>5. Contact Us</h2>
+            <p>If you have questions, contact us at: <a href="mailto:support@onpdf.netlify.app">support@onpdf.netlify.app</a></p>
+        </main>
+        <footer class="footer">
+            <div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+            <p class="footer-text">&copy; <span class="dynamic-year">2025</span> <a href="index.html">onPDF</a></p>
+        </footer>
+    </div>
+    <script>
+        document.getElementById('policyDate').textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());
+    </script>
+</body>
+</html>
