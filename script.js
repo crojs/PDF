@@ -1,8 +1,48 @@
 (function() {
     'use strict';
+
+    // ডাইনামিক বছর
     document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());
+
+    // মোবাইল নেভিগেশন টগল (সব পেজে কাজ করবে)
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.classList.toggle('active', isOpen);
+            navToggle.setAttribute('aria-expanded', isOpen);
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                navLinks.classList.remove('open');
+                navToggle.classList.remove('active');
+                navToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // টুল উপাদান পাওয়া গেলে তবেই টুল কোড চালানো হবে
     const uploadZone = document.getElementById('uploadZone');
     if (!uploadZone) return;
+
     const fileInput = document.getElementById('fileInput');
     const imageGrid = document.getElementById('imageGrid');
     const imageListSection = document.getElementById('imageListSection');
@@ -24,6 +64,7 @@
     const processingSteps = document.querySelectorAll('.processing-step');
     const successDesc = document.getElementById('successDesc');
     const toastContainer = document.getElementById('toastContainer');
+
     let imageFiles = [];
     let imageDataUrls = [];
     let isProcessing = false;
@@ -32,8 +73,10 @@
     const MAX_IMAGES = 50;
     const MAX_FILE_SIZE = 25 * 1024 * 1024;
     const ringCircumference = 2 * Math.PI * 54;
+
     progressRingFill.style.strokeDasharray = ringCircumference;
     progressRingFill.style.strokeDashoffset = ringCircumference;
+
     const pageSizes = {
         a4: { width: 210, height: 297 },
         letter: { width: 216, height: 279 },
@@ -41,6 +84,7 @@
         a5: { width: 148, height: 210 },
         a3: { width: 297, height: 420 }
     };
+
     function showToast(message, type = 'info', duration = 3500) {
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
@@ -49,6 +93,7 @@
         toastContainer.appendChild(toast);
         setTimeout(() => { toast.classList.add('removing'); setTimeout(() => toast.remove(), 320); }, duration);
     }
+
     function updateSectionVisibility() {
         const hasImages = imageFiles.length > 0;
         imageListSection.classList.toggle('visible', hasImages);
@@ -57,29 +102,34 @@
         successSection.classList.remove('visible');
         imageCountBadge.textContent = imageFiles.length;
     }
+
     function clearAllImages() {
         if (isProcessing) return;
         imageFiles = []; imageDataUrls = []; generatedPdfBlob = null;
         renderImageGrid(); updateSectionVisibility(); fileInput.value = '';
         showToast('All images removed.', 'info');
     }
+
     function removeImage(index) {
         if (isProcessing) return;
         imageFiles.splice(index, 1); imageDataUrls.splice(index, 1);
         renderImageGrid(); updateSectionVisibility();
     }
+
     function moveImageLeft(index) {
         if (index <= 0 || isProcessing) return;
         [imageFiles[index], imageFiles[index - 1]] = [imageFiles[index - 1], imageFiles[index]];
         [imageDataUrls[index], imageDataUrls[index - 1]] = [imageDataUrls[index - 1], imageDataUrls[index]];
         renderImageGrid();
     }
+
     function moveImageRight(index) {
         if (index >= imageFiles.length - 1 || isProcessing) return;
         [imageFiles[index], imageFiles[index + 1]] = [imageFiles[index + 1], imageFiles[index]];
         [imageDataUrls[index], imageDataUrls[index + 1]] = [imageDataUrls[index + 1], imageDataUrls[index]];
         renderImageGrid();
     }
+
     function renderImageGrid() {
         imageGrid.innerHTML = '';
         imageFiles.forEach((file, index) => {
@@ -100,6 +150,7 @@
             imageGrid.appendChild(item);
         });
     }
+
     function loadFileAsDataUrl(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
@@ -108,6 +159,7 @@
             reader.readAsDataURL(file);
         });
     }
+
     async function processFiles(fileList) {
         if (isProcessing) return;
         const files = Array.from(fileList);
@@ -127,6 +179,7 @@
         if (validCount > 0) { renderImageGrid(); updateSectionVisibility(); showToast(`${validCount} image(s) added.`, 'success'); }
         else if (skippedCount > 0) showToast('No valid JPG images found.', 'error');
     }
+
     uploadZone.addEventListener('click', () => { if (!isProcessing) fileInput.click(); });
     uploadZone.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!isProcessing) fileInput.click(); } });
     fileInput.addEventListener('change', () => processFiles(fileInput.files));
@@ -137,11 +190,13 @@
     btnConvert.addEventListener('click', convertToPdf);
     btnDownloadAgain.addEventListener('click', () => { if (generatedPdfBlob) { downloadBlob(generatedPdfBlob, generatedPdfFileName); } });
     btnStartNew.addEventListener('click', () => { clearAllImages(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
     function updateProgress(percent) {
         const clamped = Math.max(0, Math.min(100, percent));
         progressRingFill.style.strokeDashoffset = ringCircumference - (clamped / 100) * ringCircumference;
         progressPercent.textContent = `${Math.round(clamped)}%`;
     }
+
     function updateSteps(activeStep, completedSteps) {
         processingSteps.forEach((stepEl) => {
             const stepNum = parseInt(stepEl.dataset.step);
@@ -150,6 +205,7 @@
             else if (stepNum === activeStep) stepEl.classList.add('active');
         });
     }
+
     function downloadBlob(blob, filename) {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -157,6 +213,7 @@
         document.body.appendChild(link); link.click(); document.body.removeChild(link);
         setTimeout(() => URL.revokeObjectURL(url), 3000);
     }
+
     function loadImage(src) {
         return new Promise((resolve, reject) => {
             const img = new Image();
@@ -165,6 +222,7 @@
             img.src = src;
         });
     }
+
     async function convertToPdf() {
         if (isProcessing) return;
         if (imageFiles.length === 0) { showToast('Please add at least one image first.', 'error'); return; }
@@ -245,10 +303,12 @@
             updateProgress(0); updateSteps(0, []);
         }
     }
+
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'o') { e.preventDefault(); if (!isProcessing) fileInput.click(); }
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); if (!isProcessing && imageFiles.length > 0) convertToPdf(); }
     });
+
     updateSectionVisibility();
     console.log('onPDF tool initialized.');
 })();

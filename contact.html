@@ -22,7 +22,11 @@
     <div class="main-container">
         <header class="header">
             <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-file-export"></i></div><span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span></a>
-            <nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+            </button>
+            <nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
         <main class="contact-content">
             <h1>Contact Us</h1>
@@ -37,6 +41,7 @@
             <p class="footer-text">&copy; <span class="dynamic-year">2025</span> <a href="index.html">onPDF</a></p>
         </footer>
     </div>
+    <script src="script.js"></script>
     <script>document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());</script>
 </body>
 </html>

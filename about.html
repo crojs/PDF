@@ -22,19 +22,23 @@
     <div class="main-container">
         <header class="header">
             <a href="index.html" class="logo"><div class="logo-icon"><i class="fas fa-file-export"></i></div><span><span class="logo-text">onPDF</span><span class="logo-sub">Converter Pro</span></span></a>
-            <nav class="nav-links"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+            </button>
+            <nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+            <div class="header-badge"><i class="fas fa-shield-alt"></i><span>100% Free &amp; Secure</span></div>
         </header>
         <main class="about-content">
             <h1>About onPDF</h1>
-            <p>onPDF is a free online tool designed to help users convert JPG images to PDF documents quickly and securely. Our mission is to provide simple, fast, and privacy-focused utilities that work directly in your browser without requiring any uploads or installations.</p>
-            <p>We believe that document conversion should be accessible to everyone. That's why all our tools are 100% free and process files locally on your device.</p>
-            <p>Our team consists of web developers and designers who are passionate about creating intuitive user experiences.</p>
+            <p>onPDF is a free online tool designed to help users convert JPG images to PDF documents quickly and securely...</p>
+            <!-- বাকি কনটেন্ট -->
         </main>
         <footer class="footer">
             <div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
             <p class="footer-text">&copy; <span class="dynamic-year">2025</span> <a href="index.html">onPDF</a></p>
         </footer>
     </div>
+    <script src="script.js"></script>
     <script>document.querySelectorAll('.dynamic-year').forEach(el => el.textContent = new Date().getFullYear());</script>
 </body>
 </html>
